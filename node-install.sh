@@ -40,6 +40,7 @@ getport443=$(iptables -L -n | grep -w 443 | awk 'NR==1{print$7}' | cut -d ':' -f
 getport8080=$(iptables -L -n | grep -w 8080 | awk 'NR==1{print$7}' | cut -d ':' -f2)
 getport8081=$(iptables -L -n | grep -w 8081 | awk 'NR==1{print$7}' | cut -d ':' -f2)
 getport8082=$(iptables -L -n | grep -w 8082 | awk 'NR==1{print$7}' | cut -d ':' -f2)
+getiptpersist=$(apt-cache policy iptables-persistent | grep Installed | grep none | awk '{print$2}')
 ###
 
 #### ROOT User Check
@@ -51,8 +52,24 @@ function checkroot(){
 		exit 0
 	fi
 }
+####
 
-checkroot
+#### Dependencies check
+function getipt(){
+if [[ "$getiptpersist" == "(none)" ]]; then
+	echo "$showinfo We need to install IPtables Persistent..."
+	echo "$showinfo When asked, press YES to save your current IPtables settings."
+	echo "$showinfo IPtables Persistent helps you keep IPT rules after a REBOOT."
+	apt install iptables-persistent
+else
+	if [[ "$getiptpersist" == * ]]; then
+		echo "$showok IPtables Persistent is already installed!"
+	fi
+fi
+}
+####
+
+checkroot && getipt
 
 apt update
 apt upgrade
@@ -83,6 +100,7 @@ echo "$showinfo Don't forget to FORWARD PORTS on your router!"
 echo "$showinfo Changing folder to $getwebdnodefolder"
 
 cd $getwebdnodefolder
+sleep 1;
 npm install
 
 echo "$showinfo Now you may run sudo bash custom_start.sh"
@@ -90,7 +108,4 @@ echo "$showinfo If you don't have custom_start.sh script, run: "
 echo "git clone https://github.com/cbusuioceanu/WebDollar-Node-Custom-Start.git"
 echo "$showinfo sudo bash custom_start.sh"
 echo "$showinfo Have fun. :)"
-
-
-
 
