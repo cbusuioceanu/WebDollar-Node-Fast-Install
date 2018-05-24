@@ -44,12 +44,12 @@ getport8082=$(iptables -L -n | grep -w 8082 | awk 'NR==1{print$7}' | cut -d ':' 
 
 #### ROOT User Check
 function checkroot(){
-        if [[ $(id -u) = 0 ]]; then
-                echo -e "$showinfo Checking for ROOT: ${GREEN}PASSED${STAND}"
-        else
-                echo -e "$showinfo Checking for ROOT: $showerror\\n${RED}This Script Needs To Run Under ROOT user!${STAND}"
-                exit 0
-        fi
+	if [[ $(id -u) = 0 ]]; then
+		echo -e "$showinfo Checking for ROOT: ${GREEN}PASSED${STAND}"
+	else
+		echo -e "$showinfo Checking for ROOT: $showerror\\n${RED}This Script Needs To Run Under ROOT user!${STAND}"
+		exit 0
+	fi
 }
 
 checkroot
@@ -72,11 +72,11 @@ npm install pm2 -g --unsafe-perm
 
 echo "$showinfo Setting IP Tables rules..."
 
-if [[ "$getport80" == 80 ]]; then echo "$showwarning Port 80 is already accepted in Firewall!"; else if [[ ! "$getport80" == 80 ]]; then echo "$showdone Setting Firewall rule for PORT 80."; iptables -A INPUT -p tcp --dport 80 -j ACCEPT;$
-if [[ "$getport443" == 443 ]]; then echo "$showwarning Port 443 is already accepted in Firewall!"; else if [[ ! "$getport443" == 443 ]]; then echo "$showdone Setting Firewall rule for PORT 443."; iptables -A INPUT -p tcp --dport 443 -j $
-if [[ "$getport8080" == 8080 ]]; then echo "$showwarning Port 8080 is already accepted in Firewall!"; else if [[ ! "$getport8080" == 8080 ]]; then echo "$showdone Setting Firewall rule for PORT 8080."; iptables -A INPUT -p tcp --dport 8$
-if [[ "$getport8081" == 8081 ]]; then echo "$showwarning Port 8081 is already accepted in Firewall!"; else if [[ ! "$getport8081" == 8081 ]]; then echo "$showdone Setting Firewall rule for PORT 8081."; iptables -A INPUT -p tcp --dport 8$
-if [[ "$getport8082" == 8082 ]]; then echo "$showwarning Port 8082 is already accepted in Firewall!"; else if [[ ! "$getport8082" == 8082 ]]; then echo "$showdone Setting Firewall rule for PORT 8082."; iptables -A INPUT -p tcp --dport 8$
+if [[ "$getport80" == 80 ]]; then echo "$showwarning Port 80 is already accepted in Firewall!"; else if [[ ! "$getport80" == 80 ]]; then echo "$showdone Setting Firewall rule for PORT 80."; iptables -A INPUT -p tcp --dport 80 -j ACCEPT; fi fi # set port 80 firewall rule
+if [[ "$getport443" == 443 ]]; then echo "$showwarning Port 443 is already accepted in Firewall!"; else if [[ ! "$getport443" == 443 ]]; then echo "$showdone Setting Firewall rule for PORT 443."; iptables -A INPUT -p tcp --dport 443 -j ACCEPT; fi fi # set port 443 firewall rule
+if [[ "$getport8080" == 8080 ]]; then echo "$showwarning Port 8080 is already accepted in Firewall!"; else if [[ ! "$getport8080" == 8080 ]]; then echo "$showdone Setting Firewall rule for PORT 8080."; iptables -A INPUT -p tcp --dport 8080 -j ACCEPT; fi fi # set port 8080 firewall rule
+if [[ "$getport8081" == 8081 ]]; then echo "$showwarning Port 8081 is already accepted in Firewall!"; else if [[ ! "$getport8081" == 8081 ]]; then echo "$showdone Setting Firewall rule for PORT 8081."; iptables -A INPUT -p tcp --dport 8081 -j ACCEPT; fi fi # set port 8081 firewall rule
+if [[ "$getport8082" == 8082 ]]; then echo "$showwarning Port 8082 is already accepted in Firewall!"; else if [[ ! "$getport8082" == 8082 ]]; then echo "$showdone Setting Firewall rule for PORT 8082."; iptables -A INPUT -p tcp --dport 8082 -j ACCEPT; fi fi # set port 8082 firewall rule
 
 echo "$showinfo Don't forget to FORWARD PORTS on your router!"
 
@@ -90,3 +90,7 @@ echo "$showinfo If you don't have custom_start.sh script, run: "
 echo "git clone https://github.com/cbusuioceanu/WebDollar-Node-Custom-Start.git"
 echo "$showinfo sudo bash custom_start.sh"
 echo "$showinfo Have fun. :)"
+
+
+
+
