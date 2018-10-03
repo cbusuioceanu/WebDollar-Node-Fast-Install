@@ -1,4 +1,4 @@
-# WebDollar-Node-Fast-Install [![Build Status](https://travis-ci.org/cbusuioceanu/WebDollar-Node-Fast-Install.svg?branch=master)](https://travis-ci.org/cbusuioceanu/WebDollar-Node-Fast-Install)
+# WebDollar Node Fast Install [![Build Status](https://travis-ci.org/cbusuioceanu/WebDollar-Node-Fast-Install.svg?branch=master)](https://travis-ci.org/cbusuioceanu/WebDollar-Node-Fast-Install)
 Configure your server as a WebDollar Node. Fast and easy!
 
 #### 1. git clone https://github.com/cbusuioceanu/WebDollar-Node-Fast-Install.git
